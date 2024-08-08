@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import gzip, pickle, pickletools
 import pandas as pd
 from my_funcs import preprocess
+import os
 
 app = Flask(__name__)
 filepath = r"titanic_model.pkl"
@@ -23,5 +24,8 @@ def predict():
     output = predictions[0]
     return jsonify({'survived': str(output)})
 
+# if __name__ == "__main__":
+#     app.run(debug=True)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
