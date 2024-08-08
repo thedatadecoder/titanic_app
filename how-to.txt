@@ -1,0 +1,32 @@
+run app in terminal:
+1. create virtual env by running:
+
+python -m venv venv
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+.\venv\Scripts\Activate.ps1
+####venv\Scripts\activate.bat
+pip install -r requirements.txt
+python install_requirements.py
+
+2. python app.py
+
+run test-cases: python -m unittest test_app.py
+
+to deactivate and remove the old env:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+deactivate
+Remove-Item -Recurse -Force .\venv
+
+Run on heroku:
+install heroku cli
+
+git init
+git add .
+git config --global user.email "soniamarpreet17@gmail.com"
+git commit -m "Initial commit"
+
+heroku create
+git push heroku master
+heroku ps:scale web=1
+heroku open
+
