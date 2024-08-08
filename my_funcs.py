@@ -30,7 +30,8 @@ def preprocess(df):
     # df["Ticket"] = df["Ticket"].apply(lambda x : clean_ticket(x))
     # df["Ticket1"] = df["Ticket"].apply(lambda x : x.split(" ")[0].strip().replace("SCBASLE", "SC"))
     df["Ticket2"] = df["Ticket"].apply(lambda x : x.split(" ")[1].strip())
-    df["Ticket2"] = df["Ticket2"].apply(lambda x: [int(s) for s in x if s.isdigit()][0])
+    # df["Ticket2"] = df["Ticket2"].apply(lambda x: [int(s) for s in x if s.isdigit()][0])
+    df["Ticket2"] = df["Ticket2"].apply(lambda x: len(x))
 
     df["Sex"] = df["Sex"].apply(lambda x : x.lower())
     df["Sex"] = df["Sex"].map({"male":1, "female":0})
