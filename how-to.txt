@@ -27,3 +27,14 @@ git commit -m "Initial commit"
 
 Host on render
 
+For docker:
+Make a Dockerfile with commands
+docker build -t thedatadecoder/titanic-image .
+docker run -p 4000:80 thedatadecoder/titanic-image
+Visit http://localhost:4000 to see your application in action.
+
+docker login
+docker tag apdocker11/titanic-image apdocker11/titanic_app:tag      #####dockerusername
+docker push apdocker11/titanic_app:tag
+
+

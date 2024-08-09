@@ -22,7 +22,7 @@ def predict():
     df = preprocess(df)
     predictions = model.predict(df)
     output = predictions[0]
-    return jsonify({'survived': str(output)})
+    return jsonify({'survived?:': str(output)})
 
 # if __name__ == "__main__":
 #     app.run(debug=True)
