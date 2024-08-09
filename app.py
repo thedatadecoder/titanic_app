@@ -20,9 +20,9 @@ def predict():
     df = pd.DataFrame([data])
     print(df.head())
     df = preprocess(df)
-    predictions = model.predict(df)
-    output = predictions[0]
-    return jsonify({'survived?:': str(output)})
+    predictions = model.predict(df.values)
+    output = list(predictions)[0]
+    return jsonify({'survived': str(output)})
 
 # if __name__ == "__main__":
 #     app.run(debug=True)

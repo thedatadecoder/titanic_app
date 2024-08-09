@@ -45,7 +45,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = data.survived ? 'Survived' : 'Did Not Survive';
+                document.getElementById('result').innerText = data.survived === '1' ? 'You would have Survived the crash!' : 'You would not have survived the crash, womp womp!';
             });
         };
     </script>
