@@ -18,7 +18,7 @@ def home():
 def predict():
     data = request.get_json(force=True)
     df = pd.DataFrame([data])
-    print(df.head())
+    #print(df.head())
     df = preprocess(df)
     predictions = model.predict(df.values)
     output = list(predictions)[0]
