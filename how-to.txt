@@ -38,3 +38,16 @@ docker tag apdocker11/titanic-image apdocker11/titanic_app:tag      #####dockeru
 docker push apdocker11/titanic_app:tag
 
 
+install chocolatey:
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+install kubernetes-cli:
+choco install kubernetes-cli
+
+setup a Cloud cluster:
+Google Cloud: Google Kubernetes Engine (GKE) Free Tier
+Create a file named deployment.yaml
+run: kubectl apply -f deployment.yaml
+Create a file named service.yaml
+run: kubectl apply -f service.yaml
+get IP address: kubectl get services
+
