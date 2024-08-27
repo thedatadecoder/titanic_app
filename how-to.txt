@@ -34,20 +34,50 @@ docker run -p 4000:80 thedatadecoder/titanic-image
 Visit http://localhost:4000 to see your application in action.
 
 docker login
-docker tag apdocker11/titanic-image apdocker11/titanic_app:tag      #####dockerusername
-docker push apdocker11/titanic_app:tag
+docker tag apdocker11/titanic-image apdocker11/titanic_app:latest      #####dockerusername :latest = version of the app
+docker push apdocker11/titanic_app:latest
 
 
 install chocolatey:
+pip install py-chocolatey
+
+run in admin powershell:
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-install kubernetes-cli:
 choco install kubernetes-cli
+kubectl version --client
+cd ~        # If you're using cmd.exe, run: cd %USERPROFILE%
+mkdir .kube
+cd .kube
+New-Item config -type file
+Enable kubernetes from the Docker application
+####az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+kubectl config get-contexts
+kubectl cluster-info
+
 
 setup a Cloud cluster:
-Google Cloud: Google Kubernetes Engine (GKE) Free Tier
+Google Cloud: Azure Kubernetes Engine Free Tier - portal.azure.com -  Azure Kubernetes Service (AKS)
+
 Create a file named deployment.yaml
 run: kubectl apply -f deployment.yaml
+
 Create a file named service.yaml
 run: kubectl apply -f service.yaml
+
 get IP address: kubectl get services
+"Kubernetes has allocated an external IP (localhost) and port (30485) for your titanic-service"
+
+check pods status: kubectl get pods
+
+Update kubernetes images with Docker:
+docker tag thedatadecoder/titanic-image:latest apdocker11/titanic-image:latest
+docker push apdocker11/titanic-image:latest
+each time you change deployment.yaml or service.yaml, run: kubectl apply -f deployment.yaml
+
+Check statuses:
+kubectl describe service titanic-service
+kubectl logs titanic-model-deployment-764555b6c7-vmn78
+
+kubectl get endpoints titanic-service
+
 

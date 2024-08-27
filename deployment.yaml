@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: your-deployment-name
+  name: titanic-model-deployment # Replace this with your deployment name
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: your-app
+      app: titanic-model # Choose a name for your app
   template:
     metadata:
       labels:
-        app: your-app
+        app: titanic-model # Make sure it matches the selector
     spec:
       containers:
-      - name: your-container-name
-        image: your-username/your-repository:tag
+      - name: titanic-container
+        image: apdocker11/titanic-image:latest # Replace with your image name   image: your-dockerhub-username/titanic-image:latest
         ports:
-        - containerPort: 80
+        - containerPort: 80 # Should match the port exposed by the Docker container

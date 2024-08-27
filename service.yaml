@@ -1,11 +1,27 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: titanic-service 
+# spec:
+#   selector:
+#     app: titanic-model 
+#   ports:
+#     - protocol: TCP
+#       port: 80 # This is the port Kubernetes will expose
+#       targetPort: 80 # This is the port inside the container, must match containerPort
+#   type: LoadBalancer # This allows external traffic access; can use NodePort for local use
+
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: your-service-name
+  name: titanic-service # Choose a name for the service
 spec:
-  type: LoadBalancer
-  ports:
-    - port: 80
-      targetPort: 80
+  type: NodePort
   selector:
-    app: your-app
+    app: titanic-model # Must match the labels in deployment.yaml
+  ports:
+    - protocol: TCP
+      port: 80  # This is the port Kubernetes will expose
+      targetPort: 80  # This is the port inside the container, must match containerPort
+      nodePort: 30485

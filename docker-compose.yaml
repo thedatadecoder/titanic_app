@@ -1,0 +1,6 @@
+version: '3'
+services:
+  web:
+    image: apdocker11/titanic-image
+    ports:
+      - "4000:80"
