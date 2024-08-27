@@ -81,3 +81,4 @@ kubectl logs titanic-model-deployment-764555b6c7-vmn78
 kubectl get endpoints titanic-service
 
 
+To stop memory consumption: wsl --shutdown
