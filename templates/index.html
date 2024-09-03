@@ -62,7 +62,7 @@
         <button type="button" onclick="openModal('parchModal')">Info</button><br><br>
 
         <label for="Fare">Fare:</label>
-        <input type="number" id="Fare" name="Fare">
+        <input type="number" id="Fare" name="Fare" step="0.0000000001">
         <button type="button" onclick="openModal('fareModal')">Info</button><br><br>
 
         <label for="Ticket">Ticket:</label>
@@ -119,7 +119,7 @@
     <div id="ticketModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('ticketModal')">&times;</span>
-            <p>Ticket: Enter your ticket number. Example: A/5 21171.</p>
+            <p>Ticket: Enter your ticket number. It should be alphabetical string (any length) followed by a space and numerical values (any length). Example: Abcdef 21101271.</p>
         </div>
     </div>
 
