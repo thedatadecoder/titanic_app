@@ -4,32 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titanic Survival Prediction</title>
+    <style>
+        /* Styling for the modal (pop-up) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Will You Survive the Titanic?</h1>
     <form id="predictionForm">
         <label for="Pclass">Passenger Class:</label>
-        <input type="number" id="Pclass" name="Pclass"><br><br>
+        <input type="number" id="Pclass" name="Pclass">
+        <button type="button" onclick="openModal('pclassModal')">Info</button><br><br>
+
         <label for="Age">Age:</label>
-        <input type="number" id="Age" name="Age"><br><br>
+        <input type="number" id="Age" name="Age">
+        <button type="button" onclick="openModal('ageModal')">Info</button><br><br>
+
         <label for="SibSp">Siblings/Spouses Aboard:</label>
-        <input type="number" id="SibSp" name="SibSp"><br><br>
+        <input type="number" id="SibSp" name="SibSp">
+        <button type="button" onclick="openModal('sibspModal')">Info</button><br><br>
+
         <label for="Parch">Parents/Children Aboard:</label>
-        <input type="number" id="Parch" name="Parch"><br><br>
+        <input type="number" id="Parch" name="Parch">
+        <button type="button" onclick="openModal('parchModal')">Info</button><br><br>
+
         <label for="Fare">Fare:</label>
-        <input type="number" id="Fare" name="Fare"><br><br>
+        <input type="number" id="Fare" name="Fare">
+        <button type="button" onclick="openModal('fareModal')">Info</button><br><br>
+
         <label for="Ticket">Ticket:</label>
-        <input type="text" id="Ticket" name="Ticket"><br><br>
+        <input type="text" id="Ticket" name="Ticket">
+        <button type="button" onclick="openModal('ticketModal')">Info</button><br><br>
+
         <label for="Sex">Sex:</label>
         <select id="Sex" name="Sex">
             <option value="male">Male</option>
             <option value="female">Female</option>
-        </select><br><br>
+        </select>
+        <button type="button" onclick="openModal('sexModal')">Info</button><br><br>
+
         <button type="submit">Predict</button>
     </form>
     <h2 id="result"></h2>
 
+    <!-- Modals -->
+    <div id="pclassModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('pclassModal')">&times;</span>
+            <p>Passenger Class: Choose 1 for First Class, 2 for Second Class, and 3 for Third Class.</p>
+        </div>
+    </div>
+
+    <div id="ageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('ageModal')">&times;</span>
+            <p>Age: Enter your age in years. Example: 25.</p>
+        </div>
+    </div>
+
+    <div id="sibspModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('sibspModal')">&times;</span>
+            <p>Siblings/Spouses Aboard: Enter the number of siblings or spouses you had aboard the Titanic. Example: 1.</p>
+        </div>
+    </div>
+
+    <div id="parchModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('parchModal')">&times;</span>
+            <p>Parents/Children Aboard: Enter the number of parents or children you had aboard the Titanic. Example: 0.</p>
+        </div>
+    </div>
+
+    <div id="fareModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('fareModal')">&times;</span>
+            <p>Fare: Enter the fare you paid for the Titanic trip in British pounds. Example: 7.25.</p>
+        </div>
+    </div>
+
+    <div id="ticketModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('ticketModal')">&times;</span>
+            <p>Ticket: Enter your ticket number. Example: A/5 21171.</p>
+        </div>
+    </div>
+
+    <div id="sexModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('sexModal')">&times;</span>
+            <p>Sex: Select Male or Female.</p>
+        </div>
+    </div>
+
     <script>
+        // Function to open the modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // Close the modal when clicking anywhere outside the modal
+        window.onclick = function(event) {
+            var modals = document.querySelectorAll('.modal');
+            modals.forEach(function(modal) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        };
+
+        // Form submission handler
         document.getElementById('predictionForm').onsubmit = function(event) {
             event.preventDefault();
             var formData = new FormData(event.target);
